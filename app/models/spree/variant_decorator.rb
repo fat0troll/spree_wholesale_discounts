@@ -10,7 +10,7 @@ Spree::Variant.class_eval do
       return self.price
     else
       self.cart_discounts.each do |disco|
-        if disco.minimal_price < amount
+        if disco.level.minimal_price < amount
           return disco.amount
         end
       end
