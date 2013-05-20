@@ -15,7 +15,7 @@ Spree::Variant.class_eval do
   #      end
   #    end
   #    # No matching discount, buy MOAR, please :)
-      return self.price
+      return 1.99
   #  end
   end
 end
