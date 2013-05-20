@@ -5,7 +5,7 @@ Spree::LineItem.class_eval do
     new_price = self.price
 
     if variant and changed? and changes.keys.include? 'quantity'
-      vprice = self.variant.discount(self.order.amount)
+      vprice = self.variant.discount(self.order.total)
       if (!new_price.nil? and vprice <= new_price) or vprice <= self.price
         return self.price = vprice
       end
