@@ -3,7 +3,7 @@ class CreateSpreeCartDiscounts < ActiveRecord::Migration
     create_table :spree_cart_discounts do |t|
       t.decimal :amount, :precision => 8, :scale => 2
       t.integer :position
-      t.references :variant
+      t.references :product
       t.references :level
       t.timestamps
     end

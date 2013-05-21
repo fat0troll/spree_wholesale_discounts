@@ -6,7 +6,7 @@ Spree::Variant.class_eval do
 
   # Calculating the price based on cart's total amount
   def discount(amount)
-    raise 'DEADBEEF'
+    #raise 'DEADBEEF'
     if self.cart_discounts.count == 0
       return self.price
     else
