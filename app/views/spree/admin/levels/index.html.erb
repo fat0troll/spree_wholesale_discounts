@@ -1,0 +1,34 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t("new_level"), new_object_url, :icon => 'add'  %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= t("levels") %></h1>
+
+<table class="index">
+  <thead>
+    <tr>
+      <th><%= t("level") %></th>
+      <th><%= t("minimal_price") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @levels.each do |lvl| %>
+      <tr id="<%= dom_id lvl %>">
+          <td><%= lvl.level %></td>
+          <td><%= lvl.minimal_price %></td>
+        <td width="140px">
+            <%= link_to_edit lvl %> &nbsp;
+            <%= link_to_delete lvl %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

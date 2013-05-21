@@ -1,0 +1,8 @@
+<%= form_for @level,
+    :url => {
+            :controller => :levels,
+            :action => :create,
+    } do |f| %>
+    <%= render 'level_form', :f => f %>
+    <button type="submit"><%= t 'actions.update' %></button>
+<% end %>

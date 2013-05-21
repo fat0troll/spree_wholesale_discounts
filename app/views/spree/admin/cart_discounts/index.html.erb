@@ -1,0 +1,35 @@
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Wholesale Discounts' } %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t("new_discount"), new_object_url, :icon => 'add'  %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= t("discounts") %></h1>
+
+<table class="index">
+  <thead>
+    <tr>
+      <th><%= t("dsc_level") %></th>
+      <th><%= t("price") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_discounts.each do |dsc| %>
+      <tr id="<%= dom_id dsc %>">
+          <td><%= dsc.level.level %></td>
+          <td><%= dsc.amount %></td>
+        <td width="140px">
+            <%= link_to_edit dsc %> &nbsp;
+            <%= link_to_delete dsc %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

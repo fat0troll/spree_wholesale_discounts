@@ -1,0 +1,13 @@
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Wholesale Discounts' } %>
+
+<%= t 'disco.adding' %>
+
+<%= form_for @cart_discount,
+    :url => {
+            :controller => :cart_discounts,
+            :action => :create,
+    } do |f| %>
+    <%= render 'disco_form', :f => f %>
+    <button type="submit"><%= t 'actions.update' %></button>
+<% end %>

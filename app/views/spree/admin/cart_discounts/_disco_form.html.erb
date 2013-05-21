@@ -1,0 +1,7 @@
+<div><%= f.label :level %><br>
+<%= f.select :level_id, Spree::Level.all.map{ |p| [p.level, p.id] } %>&nbsp;
+<%= error_message_on :cart_discount, :level_id, :class => 'fullwidth title' %></div>
+
+<div><%= f.label :amount %><br>
+<%= f.text_field :amount %>&nbsp;
+<%= error_message_on :cart_discount, :amount, :class => 'fullwidth title' %></div>

@@ -3,4 +3,5 @@ class Spree::Level < ActiveRecord::Base
 
   validates :level, presence: true
   validates :minimal_price, presence: true
+  validates_uniqueness_of :level
 end

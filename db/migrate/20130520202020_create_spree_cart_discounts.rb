@@ -11,10 +11,12 @@ class CreateSpreeCartDiscounts < ActiveRecord::Migration
       t.integer :level
       t.decimal :minimal_price, :precision => 8, :scale => 2
     end
+    add_column :spree_orders, :level_id, :integer
   end
 
   def self.down
     drop_table :spree_cart_discounts
     drop_table :spree_levels
+    remove_column :spree_orders, :level_id, :integer
   end
 end

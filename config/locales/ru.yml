@@ -1,0 +1,20 @@
+ru:
+  disco:
+    adding: 'Добавление скидки'
+    editing: 'Редактирование скидки'
+  dsc_level: 'Уровень скидки'
+  disco_levels: 'Уровни скидок'
+  discounts: 'Скидки'
+  new_level: 'Новый уровень скидки'
+  levels: 'Текущие уровни'
+  level: 'Порядковый номер'
+  minimal_price: 'Минимальная сумма'
+  activerecord:
+    attributes:
+      spree_level:
+        level: 'Порядковый номер'
+        minimal_price: 'Минимальная сумма'
+      spree_cart_discount:
+        level: 'Уровень'
+        level_id: 'Уровень'
+        amount: 'Новая цена'

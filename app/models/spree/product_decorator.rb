@@ -4,19 +4,17 @@ Spree::Product.class_eval do
 
   attr_accessible :cart_discounts_attributes
 
-  # Calculating the price based on cart's total amount
-  def discount(amount)
-    raise 'DEADBEEF'
-    if self.cart_discounts.count == 0
+  # Calculating the price based on cart's wholesale level
+  def discount(level=0)
+    #raise 'DEADBEEF'
+    if self.cart_discounts.count == 0 or level == 0 or level.nil?
       return self.price
     else
-      self.cart_discounts.each do |disco|
-        if disco.level.minimal_price < amount
-          return disco.amount
-        end
+      if self.cart_discounts.find_by_level_id(level).nil?
+        return self.cart_discounts.sort_by_level.first.amount
+      else
+        return self.cart_discounts.find_by_level_id(level).amount
       end
-      # No matching discount, buy MOAR, please :)
-      return self.price
     end
   end
 end

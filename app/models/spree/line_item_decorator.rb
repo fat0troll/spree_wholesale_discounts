@@ -4,7 +4,8 @@ Spree::LineItem.class_eval do
     old_copy_price.bind(self).call
     new_price = self.price
 
-    vprice = self.product.discount(self.order.total)
+    self.order.define_level
+    vprice = self.product.discount(self.order.level_id)
     if (!new_price.nil? and vprice <= new_price) or vprice <= self.price
       return self.price = vprice
     end
