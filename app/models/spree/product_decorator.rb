@@ -1,4 +1,4 @@
-Spree::Variant.class_eval do
+Spree::Product.class_eval do
   has_many :cart_discounts, :dependent => :destroy
   accepts_nested_attributes_for :cart_discounts, :allow_destroy => true
 
