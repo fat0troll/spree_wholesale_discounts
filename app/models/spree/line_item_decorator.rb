@@ -14,4 +14,8 @@ Spree::LineItem.class_eval do
   after_save do
     self.order.save
   end
+
+  after_destroy do
+    self.order.save
+  end
 end
