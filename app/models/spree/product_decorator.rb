@@ -11,7 +11,7 @@ Spree::Product.class_eval do
       return self.price
     else
       if self.cart_discounts.find_by_level_id(level).nil?
-        return self.cart_discounts.sort_by_level.first.amount
+        return self.cart_discounts.find(:all, :conditions => ["level_id < ?", level]).sort_by(&:level_id).reverse.first.amount
       else
         return self.cart_discounts.find_by_level_id(level).amount
       end

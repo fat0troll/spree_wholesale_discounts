@@ -26,7 +26,9 @@
           <td><%= lvl.minimal_price %></td>
         <td width="140px">
             <%= link_to_edit lvl %> &nbsp;
-            <%= link_to_delete lvl %>
+            <% if Spree::CartDiscount.find(:all, :conditions => ["level_id = ?", lvl.id]).empty? %>
+              <%= link_to_delete lvl %>
+            <% end %>
         </td>
       </tr>
     <% end %>

@@ -1,4 +1,8 @@
 ru:
+  errors:
+    levels:
+      need_first: 'должен существовать уровень 1'
+      must_be_serial: 'не пропускайте номера!'
   disco:
     adding: 'Добавление скидки'
     editing: 'Редактирование скидки'
