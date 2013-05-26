@@ -52,4 +52,16 @@ Spree::Order.class_eval do
     Spree::Order.update_all({level_id: level_id}, {:id => self.id})
     return level_id
   end
+
+  after_create do
+    define_level
+  end
+
+  before_save do
+    define_level
+  end
+
+  before_update do
+    define_level
+  end
 end
