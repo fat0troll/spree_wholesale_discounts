@@ -64,4 +64,8 @@ Spree::Order.class_eval do
   before_update do
     define_level
   end
+
+  before_destroy do
+    Spree::Order.update_all({level_id: 0}, {:id => self.id})
+  end
 end
