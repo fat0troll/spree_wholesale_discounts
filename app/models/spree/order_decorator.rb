@@ -13,7 +13,7 @@ Spree::Order.class_eval do
       end
     else
       line_items.each do |li|
-        if li.product.cart_discounts.nil?
+        if li.product.cart_discounts.empty?
           amnt = amnt + (li.amount * li.quantity)
         else
           if li.product.cart_discounts.find_by_level_id(level)
@@ -29,29 +29,23 @@ Spree::Order.class_eval do
 
   def define_level
     #raise 'DEADBEEF'
-    level_id = self.level_id
+    level_id = 0
     # Returning true level based on "true" price
+    # If we haven't first level in database, we haven't levels at all!
     unless Spree::Level.find_by_level(1).nil?
-      # If we haven't first level in database, we haven't levels at all!
-      if level_id.nil? or level_id == 0
-        # Checking for first level
-          if calculate_price_for_level(0) > Spree::Level.find_by_level(1).minimal_price
-            level_id = 1
+      # Very simple algorhythm: loop over all levels, from highest to lowest and checking, if it's minimal price smaller
+      # than cart's amount. When true -- it's our level ;) If all levels returns false -- our level is zero.
+      Spree::Level.all.sort_by(&:level).reverse.each do |lvl|
+        if lvl.minimal_price > calculate_price_for_level(lvl.level - 1)
+          # Price is smaller, going ahead, unless level was first -- if level was first, and statement still true -- we're at
+          # zero level :)
+          unless lvl.level == 1
+            next
           end
-      else
-        # Checking for "level balance": if we going big, we achieve better level, otherwise, going down
-        cur_lvl = level_id
-        next_lvl = cur_lvl + 1
-        prev_lvl = cur_lvl - 1
-        # Checking for next level...
-        unless Spree::Level.find_by_level(next_lvl).nil?
-          if calculate_price_for_level(cur_lvl) > Spree::Level.find_by_level(next_lvl).minimal_price
-            level_id = next_lvl
-          end
-        end
-        # ...otherwise going DOWN! Yarr!
-        if calculate_price_for_level(prev_lvl) < Spree::Level.find_by_level(cur_lvl).minimal_price
-          level_id = prev_lvl
+        else
+          # Price is bigger, fuck yeah!
+          level_id = lvl.level
+          break
         end
       end
     end
