@@ -44,16 +44,12 @@ Spree::Order.class_eval do
           end
         else
           # Price is bigger, fuck yeah!
-          level_id = lvl.level
+          level_id = lvl.id
           break
         end
       end
     end
-    self.level_id = level_id
+    Spree::Order.update_all({level_id: level_id}, {:id => self.id})
     return level_id
-  end
-
-  after_save do
-    self.define_level
   end
 end
